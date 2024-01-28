@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class EventDeleted
+class EventCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,13 +21,10 @@ class EventDeleted
         $this->event = $event;
         $this->userId = $userId;
     }
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+
+
     public function broadcastOn()
     {
-        return new PrivateChannel('event.' . $this->event->id . '.' . $this->userId);
+        return new PrivateChannel('event.created.'  . $this->event->id . '.' . $this->userId);
     }
 }

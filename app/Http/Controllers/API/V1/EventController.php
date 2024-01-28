@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Events\EventCreated;
 use App\Events\EventDeleted;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Annotations as OA;
 
 class EventController extends Controller
@@ -42,6 +44,9 @@ class EventController extends Controller
         ]);
 
         $event = Event::create($validatedData);
+        $userId = Auth::id();
+        event(new EventCreated($event, $userId));
+
 
         return response()->json(['message' => 'Event created successfully', 'event' => $event], 201);
     }
@@ -74,14 +79,12 @@ class EventController extends Controller
      */
     public function delete($eventId)
     {
-        // Найдите событие по ID или другим способом
         $event = Event::findOrFail($eventId);
 
-        // Удалите событие
         $event->delete();
 
-        // Вызовите событие удаления
-        event(new EventDeleted($event));
+        $userId = Auth::id();
+        event(new EventDeleted($event, $userId));
 
         // Возвращаем успешный ответ
         return response()->json(['message' => 'Event deleted successfully'], 200);

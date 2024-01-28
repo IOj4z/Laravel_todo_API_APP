@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\EventController;
 use App\Http\Controllers\API\V1\TaskController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([\App\Http\Middleware\LogRequestsMiddleware::class])->group(function () {
     Route::prefix('v1')->group(function () {
-
+        Broadcast::routes();
         Route::prefix('tasks')->group(function () {
             Route::get('/', [TaskController::class, 'index']);
             Route::post('/', [TaskController::class, 'store'])->middleware('basic.auth');
