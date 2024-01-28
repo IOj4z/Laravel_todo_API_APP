@@ -1,64 +1,174 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Управление событиями API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Описание
+API "Управление событиями" предоставляет возможность управления событиями и задачами, а также аутентификацию пользователей.
 
-## About Laravel
+## Установка и запуск
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **Установите зависимости:**
+    - Убедитесь, что у вас установлен PHP, Composer, MySQL (или другая база данных, поддерживаемая Laravel).
+    - Установите Node.js и npm для управления зависимостями фронтенда (если требуется).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Клонируйте репозиторий:**
+    - Склонируйте репозиторий проекта из Git-репозитория на вашем локальном компьютере.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Установите зависимости PHP:**
+    - Перейдите в корневую директорию проекта и выполните `composer install` для установки всех зависимостей PHP.
 
-## Learning Laravel
+4. **Настройте окружение:**
+    - Создайте файл `.env` на основе файла `.env.example` и настройте соединение с базой данных, а также другие параметры окружения.
+    - Сгенерируйте ключ приложения, выполнив команду `php artisan key:generate`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. **Создайте и заполните базу данных:**
+    - Создайте базу данных для проекта.
+    - Выполните миграции, запустив `php artisan migrate`, чтобы создать необходимые таблицы в базе данных.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. **Установите зависимости фронтенда (по желанию):**
+    - Если проект использует фронтендную часть (например, Vue.js), перейдите в директорию фронтенда и выполните `npm install` для установки всех зависимостей фронтенда.
 
-## Laravel Sponsors
+7. **Запустите сервер:**
+    - Запустите встроенный сервер PHP с помощью команды `php artisan serve`. Приложение будет доступно по адресу `http://localhost:8000`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+8. **Запустите очереди (по желанию):**
+    - Если ваше приложение использует очереди Laravel, запустите обработчики очередей с помощью команды `php artisan queue:work`.
 
-### Premium Partners
+9. **Документация API:**
+    - Для получения подробной информации о методах и эндпоинтах API обратитесь к файлу storage/api-docs/api-docs.json, который содержит спецификацию API в формате OpenAPI (Swagger).
+      
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
+## Документация API
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Регистрация пользователя
 
-## Code of Conduct
+- **Метод:** `POST`
+- **Путь:** `/api/v1/register`
+- **Теги:** `Authentication`
+- **Описание:** Регистрирует нового пользователя с указанным именем, адресом электронной почты и паролем.
+- **Параметры запроса:**
+    - `name` (string, required): Имя пользователя.
+    - `email` (string, required, format: email): Адрес электронной почты пользователя.
+    - `password` (string, required, format: password): Пароль пользователя.
+    - `password_confirmation` (string, required, format: password): Подтверждение пароля пользователя.
+- **Ответы:**
+    - `201`: Пользователь успешно зарегистрирован.
+      ```json
+      {
+          "user": {
+              // Свойства пользователя
+          }
+      }
+      ```
+    - `422`: Ошибка валидации.
+      ```json
+      {
+          "message": "The given data was invalid."
+      }
+      ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Управление событиями
 
-## Security Vulnerabilities
+#### Создание события
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Метод:** `POST`
+- **Путь:** `/api/v1/events`
+- **Теги:** `Events`
+- **Описание:** Создает новое событие.
+- **Параметры запроса:** См. модель `Event`.
+- **Ответы:**
+    - `201`: Событие успешно создано.
+      ```json
+      {
+          // Свойства созданного события
+      }
+      ```
 
-## License
+#### Удаление события
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Метод:** `DELETE`
+- **Путь:** `/api/v1/events/{id}`
+- **Теги:** `Events`
+- **Описание:** Удаляет существующее событие по его ID.
+- **Параметры пути:**
+    - `id` (integer, required): ID события.
+- **Ответы:**
+    - `204`: Событие успешно удалено.
+
+### Управление задачами
+
+#### Получение списка задач
+
+- **Метод:** `GET`
+- **Путь:** `/api/v1/tasks`
+- **Теги:** `Tasks`
+- **Описание:** Возвращает список задач.
+- **Ответы:**
+    - `200`: Успешное выполнение.
+      ```json
+      {
+          // Список задач
+      }
+      ```
+
+#### Создание новой задачи
+
+- **Метод:** `POST`
+- **Путь:** `/api/v1/tasks`
+- **Теги:** `Tasks`
+- **Описание:** Создает новую задачу.
+- **Параметры запроса:** См. модель `Task`.
+- **Ответы:**
+    - `201`: Задача успешно создана.
+      ```json
+      {
+          // Свойства созданной задачи
+      }
+      ```
+
+#### Получение информации о задаче
+
+- **Метод:** `GET`
+- **Путь:** `/api/v1/tasks/{id}`
+- **Теги:** `Tasks`
+- **Описание:** Возвращает данные задачи по ее ID.
+- **Параметры пути:**
+    - `id` (integer, required): ID задачи.
+- **Ответы:**
+    - `200`: Успешное выполнение.
+      ```json
+      {
+          // Данные задачи
+      }
+      ```
+
+#### Обновление существующей задачи
+
+- **Метод:** `PUT`
+- **Путь:** `/api/v1/tasks/{id}`
+- **Теги:** `Tasks`
+- **Описание:** Обновляет существующую задачу по ее ID.
+- **Параметры пути:**
+    - `id` (integer, required): ID задачи.
+- **Параметры запроса:** См. модель `Task`.
+- **Ответы:**
+    - `200`: Задача успешно обновлена.
+      ```json
+      {
+          // Свойства обновленной задачи
+      }
+      ```
+
+#### Удаление существующей задачи
+
+- **Метод:** `DELETE`
+- **Путь:** `/api/v1/tasks/{id}`
+- **Теги:** `Tasks`
+- **Описание:** Удаляет существующую задачу по ее ID.
+- **Параметры пути:**
+    - `id` (integer, required): ID задачи.
+- **Ответы:**
+    - `204`: Задача успешно удалена.
+
+## Лицензия
+
+Этот проект лицензирован под [MIT License](LICENSE).
