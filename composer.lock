@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ffca400e083f42769033b5ee676aa228",
+    "content-hash": "2b388acf5566b5f053bd0ecfeae9ce64",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1184,6 +1184,53 @@
                 }
             ],
             "time": "2023-12-03T20:05:35+00:00"
+        },
+        {
+            "name": "ioj4z/log-requests",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IOj4z/log-requests.git",
+                "reference": "b4f0fe6ad442af92c8a9177e54225cc10da1497f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IOj4z/log-requests/zipball/b4f0fe6ad442af92c8a9177e54225cc10da1497f",
+                "reference": "b4f0fe6ad442af92c8a9177e54225cc10da1497f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0",
+                "php": "^7.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ioj4z\\LogRequests\\": "app/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alisher",
+                    "email": "media.art.press2@gmail.com"
+                }
+            ],
+            "description": "Middleware for logging requests in Laravel",
+            "keywords": [
+                "laravel",
+                "logging",
+                "middleware"
+            ],
+            "support": {
+                "issues": "https://github.com/IOj4z/log-requests/issues",
+                "source": "https://github.com/IOj4z/log-requests/tree/main"
+            },
+            "time": "2024-01-28T07:13:08+00:00"
         },
         {
             "name": "laravel/framework",

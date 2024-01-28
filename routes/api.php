@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('v1')->group(function () {
-    Route::post('/register', [RegisterController::class, 'register']);
+Route::middleware([\App\Http\Middleware\LogRequestsMiddleware::class])->group(function () {
+    Route::prefix('v1')->group(function () {
+        Route::post('/register', [RegisterController::class, 'register']);
 
-    Route::get('/tasks', [TaskController::class, 'index']);
-    Route::post('/tasks', [TaskController::class, 'store'])->middleware('basic.auth');
-    Route::get('/tasks/{task}', [TaskController::class, 'show'])->middleware('basic.auth');
-    Route::put('/tasks/{task}', [TaskController::class, 'update'])->middleware('basic.auth');
-    Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->middleware('basic.auth');
+        Route::get('/tasks', [TaskController::class, 'index']);
+        Route::post('/tasks', [TaskController::class, 'store'])->middleware('basic.auth');
+        Route::get('/tasks/{task}', [TaskController::class, 'show'])->middleware('basic.auth');
+        Route::put('/tasks/{task}', [TaskController::class, 'update'])->middleware('basic.auth');
+        Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->middleware('basic.auth');
+    });
 });
-
-
