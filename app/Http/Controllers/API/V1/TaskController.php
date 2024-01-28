@@ -10,20 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Response;
-/**
- * @OA\Info(
- *      title="Your API Title",
- *      version="1.0.0",
- *      description="Your API Description"
- * )
- * @OA\SecurityScheme(
- *     securityScheme="basicAuth",
- *     in="header",
- *     name="Authorization",
- *     type="http",
- *     scheme="basic"
- * )
- */
+
 class TaskController extends Controller
 {
     /**

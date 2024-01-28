@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class RegisterController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
         ]);
-
+        event(new UserRegistered($user));
         return response()->json(['user' => $user], Response::HTTP_CREATED);
     }
 
